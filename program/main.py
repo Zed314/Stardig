@@ -52,6 +52,11 @@ def readFile(name):
     print(res["IDplayer"].unique())
     print(res.groupby('IDplayer').size())
     question = res[["Race",0,1,2]]
+    question = pd.get_dummies(question,prefix=['race', "first","second","third"], drop_first=True)
+
+   # question.loc[question['Race'] == 'Protoss', 'Race'] = 1
+#    question.loc[question['Race'] == 'Terran', 'Race'] = 2
+ #   question.loc[question['Race'] == 'Zerg', 'Race'] = 4
     answer = res["IDplayer"]
     X_train, X_test, y_train, y_test = train_test_split(question, answer, random_state=0)
     clf = DecisionTreeClassifier().fit(X_train, y_train)
@@ -60,8 +65,7 @@ def readFile(name):
      .format(clf.score(X_train, y_train)))
     print('Accuracy of Decision Tree classifier on test set: {:.2f}'
      .format(clf.score(X_test, y_test)))
-    
-    
+
     
 
 
