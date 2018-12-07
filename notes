@@ -1,0 +1,13 @@
+Pour l'écriture, on prend en compte l'intervale entre les digrammes
+t5,…,t10 => time stamps
+
+"../input/train.csv/TRAIN.CSV"
+
+select shift + entrée => pas à pas
+
+On peut utiliser mathplotlib, il apparait dans la console si on utilise python (pas uniquement jupyter notebook)
+
+Important : trouver vite ! 10/15 secondes
+Prendre en compte plusieurs parties d'un joueur pour pouvoir savoir qui se cache derrière
+
+regarder les dix premières secondes
