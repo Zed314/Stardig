@@ -117,7 +117,12 @@ def dictFeatures(row):
     for i,key in enumerate(tabHotKeyUsage):
         dictF[str(i)+"proportionInBegin"] = key
 
+        
+
+    #for i,action in enumerate(actions):
+    #    dictF[len(actions)+"gram"+i]
     return dictF
+
 
 def putIdOnTest(trainData,testData, doAnEstimation=False):
 
