@@ -26,14 +26,13 @@ def printcsv(data):
 def isAction(strAction):
     if not strAction :
         return False
-    return strAction == "s" or strAction == "Base" or strAction.startswith("hotkey") or strAction.startswith("t")
+    return strAction == "s" or strAction == "Base" or strAction.startswith("hotkey")
 def isTime(strAction):
     if not strAction:
         return False
     return strAction[0]=="t"
 def getTime(strAction):
-    strAction.pop(0)
-    return int(strAction)
+    return int(strAction[1:])
 
 def getNbOfHotKey(strAction):
     if strAction.startswith("hotkey"):
@@ -104,18 +103,18 @@ def dictFeatures(row):
     nlargest = heapq.nlargest(2, tabHotKeyUsage)
     dictF["secfavHK"] = tabHotKeyUsage.index(nlargest[1])
     tabHotKeyUsage = [0] * 10
-    for action in row:
-        if isAction(action):
-            nbHK = getNbOfHotKey(action)
-            if (nbHK[0] != -1):
-                tabHotKeyUsage[nbHK[0]] += 1
-        elif isTime(action):
-            currTime = getTime(action)
-            if currTime > 100:
-                break
+    #for action in row:
+     #   if isAction(action):
+    #        nbHK = getNbOfHotKey(action)
+     #       if (nbHK[0] != -1):
+     #           tabHotKeyUsage[nbHK[0]] += 1
+      #  elif isTime(action):
+   #         currTime = getTime(action)
+    #        if currTime > 100:
+    #            break
 
-    for i,key in enumerate(tabHotKeyUsage):
-        dictF[str(i)+"proportionInBegin"] = key
+   # for i,key in enumerate(tabHotKeyUsage):
+   #     dictF[str(i)+"proportionInBegin"] = key
 
         
 
@@ -129,7 +128,6 @@ def putIdOnTest(trainData,testData, doAnEstimation=False):
     #features = []
    # training = trainData
     training = trainData.apply(lambda row: pd.Series(dictFeatures(row)), axis=1)
-
     training_answer = trainData["IDplayer"]
 
     clf = RandomForestClassifier(n_estimators=100).fit(training, training_answer)
@@ -188,7 +186,7 @@ def dispPlayplayer(data):
 #todo : first used
 #todo : how many definition before first use
 #todo : order of definition
-#todo : timeframe of definition of each hk (or just for the 5 first)
+#todo : timeframe of definition of each hk (or just for the 5 first)
 #dispPlayplayer(readFile("train"))
 printcsv(putIdOnTest(readFile("train"),readFile("test")))
 #putIdOnTest(readFile("train"),readFile("test"))
